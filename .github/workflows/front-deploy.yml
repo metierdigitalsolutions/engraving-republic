@@ -46,17 +46,22 @@ jobs:
       #       echo "DNS not ready, waiting..."
       #       sleep 30
       #     done
+
+      # - name: Test FTP Connection
+      #   run: |
+      #     echo "Testing connection to server..."
+      #     nc -zv ${{ secrets.HOSTNAME }} 21  # Test FTP port 21
+      #     # or for SFTP
+      #     nc -zv ${{ secrets.HOSTNAME }} 22  # Test SSH/SFTP port 22
           
           
       # Deploy Build Output to Landing-Page Folder
       - name: Deploy Landing-Page Build
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ${{ secrets.HOSTNAME }}
+          server: ftp.engravingrepublicng.com
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          protocol: sftp      # Use SFTP instead of FTP
-          port: 22           # SFTP uses port 22
           local-dir: ./dist/
           server-dir: /
           log-level: minimal  # Reduced from verbose to standard
