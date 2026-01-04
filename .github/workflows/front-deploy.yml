@@ -3,7 +3,8 @@ name: Publish Entraving Frontend
 on:
   push:
     branches:
-      - main
+      - staging
+      - master
 
 jobs:
   Deploy-Frontend:
@@ -43,10 +44,10 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.HOSTNAME }}
-          username: ${{ secrets.MAIN_FRONT_USERNAME }}
+          username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           local-dir: ./dist/
-          server-dir: /dist/
+          server-dir: /
           log-level: minimal  # Reduced from verbose to standard
           state-name: .ftp-deploy-state-${{ github.ref_name }}.json  # Separate state per branch
           dangerous-clean-slate: false
