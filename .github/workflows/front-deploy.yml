@@ -52,7 +52,7 @@ jobs:
       - name: Deploy Landing-Page Build
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ftp.engravingrepublicng.com
+          server: engravingrepublicng.com
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           local-dir: ./dist/
