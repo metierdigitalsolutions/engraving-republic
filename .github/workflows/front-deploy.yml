@@ -1,0 +1,73 @@
+name: Publish Entraving Frontend
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Deploy-Frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository with submodules
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true  # Enable submodules during checkout
+          fetch-depth: 1
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      # Setup Node.js version
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'  # Enable npm caching
+
+      # Install dependencies (npm ci will use cache if available)
+      - name: Install dependencies
+        run: npm ci --prefer-offline
+
+      # Build Landing-Page with environment-specific command
+      - name: Build Landing-Page
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/staging" ]; then
+            npm run build:staging
+          else
+            npm run build:production
+          fi
+
+      # Deploy Build Output to Landing-Page Folder
+      - name: Deploy Landing-Page Build
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.MAIN_FRONT_USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          local-dir: ./dist/
+          server-dir: /dist/
+          log-level: minimal  # Reduced from verbose to standard
+          state-name: .ftp-deploy-state-${{ github.ref_name }}.json  # Separate state per branch
+          dangerous-clean-slate: false
+          exclude: |
+            **/.DS_Store
+            **/.git/**
+            **/.gitignore
+            **/.github/**
+            **/.env*
+            **/*.map
+            **/test/**
+            **/tests/**
+            **/spec/**
+            **/cypress/**
+            **/node_modules/**
+            **/README.md
+            **/CHANGELOG.md
+            **/LICENSE
+            **/package.json
+            **/package-lock.json
+            **/tsconfig.json
+            **/webpack.config.js
+            **/src/**
+            **/public/**

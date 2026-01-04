@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" rx="18" fill="#0B1120"/>
+
+  <!-- Engraved-style monogram -->
+  <path
+    d="M30 25h22c10 0 16 5 16 13 0 6-4 10-9 12l11 18h-10l-10-16H40v16H30V25zm10 8v14h12c5 0 8-3 8-7s-3-7-8-7H40z"
+    fill="#0B7A3B"
+  />
+
+  <!-- Subtle laser cut line -->
+  <line
+    x1="25"
+    y1="72"
+    x2="75"
+    y2="72"
+    stroke="#B11217"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+</svg>
