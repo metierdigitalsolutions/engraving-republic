@@ -40,12 +40,20 @@ jobs:
           fi
 
       # In GitHub Actions, add a wait step
-      - name: Wait for DNS propagation
+      # - name: Wait for DNS propagation
+      #   run: |
+      #     until nslookup engravingrepublicng.com; do
+      #       echo "DNS not ready, waiting..."
+      #       sleep 30
+      #     done
+
+      - name: Test FTP Connection
         run: |
-          until nslookup engravingrepublicng.com; do
-            echo "DNS not ready, waiting..."
-            sleep 30
-          done
+          echo "Testing connection to server..."
+          nc -zv ${{ secrets.HOSTNAME }} 21  # Test FTP port 21
+          # or for SFTP
+          nc -zv ${{ secrets.HOSTNAME }} 22  # Test SSH/SFTP port 22
+          
           
       # Deploy Build Output to Landing-Page Folder
       - name: Deploy Landing-Page Build
