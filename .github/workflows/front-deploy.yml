@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - staging
-      - master
+      - main
 
 jobs:
   Deploy-Frontend:
@@ -36,7 +36,7 @@ jobs:
           if [ "${{ github.ref }}" == "refs/heads/staging" ]; then
             npm run build:staging
           else
-            npm run build
+            npm run build:production
           fi
 
       # Deploy Build Output to Landing-Page Folder
