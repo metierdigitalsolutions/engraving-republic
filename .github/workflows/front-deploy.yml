@@ -46,13 +46,6 @@ jobs:
       #       echo "DNS not ready, waiting..."
       #       sleep 30
       #     done
-
-      - name: Test FTP Connection
-        run: |
-          echo "Testing connection to server..."
-          nc -zv ${{ secrets.HOSTNAME }} 21  # Test FTP port 21
-          # or for SFTP
-          nc -zv ${{ secrets.HOSTNAME }} 22  # Test SSH/SFTP port 22
           
           
       # Deploy Build Output to Landing-Page Folder
