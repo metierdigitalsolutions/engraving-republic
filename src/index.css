@@ -25,3 +25,20 @@
 .reveal-slow {
   transition-duration: 900ms;
 }
+
+button {
+  transition: transform 400ms var(--ease-out),
+              box-shadow 400ms var(--ease-out);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}

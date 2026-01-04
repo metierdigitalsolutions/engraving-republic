@@ -6,10 +6,18 @@ const services = [
   "Plastic Engraving",
 ]
 
+import useRevealOnScroll from "../hooks/useRevealOnScroll"
+
 export default function Services() {
+  
+  const ref = useRevealOnScroll()
+
   return (
     <section className="bg-[#0b0b0b] text-white py-20">
-      <div className="max-w-6xl mx-auto px-6">
+      <div
+        // ref={ref}
+        className="max-w-6xl mx-auto px-6 reveal reveal-slow"
+      >
         
         <h2 className="text-3xl font-semibold mb-12">
           What We Do

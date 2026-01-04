@@ -17,7 +17,7 @@ export default function Gallery() {
       <h2 className="text-xl font-bold mb-4">Our Work</h2>
 
       {/* Gallery Grid */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-6">
         {images.map((src, index) => (
           <button
             key={src}
@@ -27,8 +27,9 @@ export default function Gallery() {
             <img
               src={src}
               alt="Engraving work"
-              className="w-full h-full object-cover hover:scale-105 transition-transform"
+              className="w-full h-full object-cover reveal_ hover:scale-105 transition-transform"
               loading="lazy"
+              style={{ transitionDelay: `${index * 60}ms` }}
             />
           </button>
         ))}
