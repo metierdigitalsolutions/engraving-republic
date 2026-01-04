@@ -62,6 +62,8 @@ jobs:
           server: ${{ secrets.HOSTNAME }}
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          protocol: sftp      # Use SFTP instead of FTP
+          port: 22           # SFTP uses port 22
           local-dir: ./dist/
           server-dir: /
           log-level: minimal  # Reduced from verbose to standard
