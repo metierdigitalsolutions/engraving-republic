@@ -38,45 +38,18 @@ jobs:
           else
             npm run build:production
           fi
-
-      - name: Deploy via SFTP
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: engravingrepublicng.com
-          port: 65002
-          username: ${{ secrets.STAGING_FRONT_USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          source: ./dist/
-          target: /
-
-        # - name: Check if deployment succeeded
-        # if: ${{ failure() }}
-        # run: |
-        #   echo "FTP deployment failed or timed out"
-        #   echo "Try alternative methods:"
-        #   echo "1. Use SFTP instead of FTP"
-        #   echo "2. Deploy manually via SSH"
-        #   echo "3. Contact hosting provider"
-        #   exit 1
+      
+      - name: Deploy via Git Push
+        run: |
+          # Configure git
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
           
-      # - name: Deploy via SFTP
-      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-      #   with:
-      #     server: ${{ secrets.HOSTNAME }}
-      #     username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
-      #     password: ${{ secrets.PASSWORD }}
-      #     port: 22  # SFTP uses port 22
-      #     local_path: './dist/*'
-      #     remote_path: '/'
-      #     args: '-o ConnectTimeout=30 -o ServerAliveInterval=60'
+          # Add remote (if you have git repo on server)
+          git remote add deploy ssh://${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}@${{ secrets.HOSTNAME }}/path/to/repo.git
+          
+          # Push to server
+          git push deploy HEAD:main -f
 
-      # # Deploy Build Output to Landing-Page Folder
-      # - name: Deploy Landing-Page Build
-      #   # uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      #   uses: sebastianpopp/ftp-action@v2.0.0
-      #   with:
-      #     host: ${{ secrets.HOSTNAME }}
-      #     user: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
-      #     password: ${{ secrets.PASSWORD }}
-      #     localDir: ./dist/
-      #     remoteDir: /
+
+          
