@@ -39,22 +39,35 @@ jobs:
             npm run build:production
           fi
 
-      # In GitHub Actions, add a wait step
-      # - name: Wait for DNS propagation
-      #   run: |
-      #     until nslookup engravingrepublicng.com; do
-      #       echo "DNS not ready, waiting..."
-      #       sleep 30
-      #     done
-          
-          
-      # Deploy Build Output to Landing-Page Folder
-      - name: Deploy Landing-Page Build
-        # uses: SamKirkland/FTP-Deploy-Action@4.3.3
-        uses: sebastianpopp/ftp-action@v2.0.0
+      - name: Deploy with Timeout
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          host: ${{ secrets.HOSTNAME }}
-          user: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
+          server: ${{ secrets.HOSTNAME }}
+          username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          localDir: ./dist/
-          remoteDir: /
+          server-dir: /
+          local-dir: ./dist/
+          timeout: 300000  # 5 minutes
+          log-level: verbose
+          
+      # - name: Deploy via SFTP
+      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      #   with:
+      #     server: ${{ secrets.HOSTNAME }}
+      #     username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
+      #     port: 22  # SFTP uses port 22
+      #     local_path: './dist/*'
+      #     remote_path: '/'
+      #     args: '-o ConnectTimeout=30 -o ServerAliveInterval=60'
+
+      # # Deploy Build Output to Landing-Page Folder
+      # - name: Deploy Landing-Page Build
+      #   # uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      #   uses: sebastianpopp/ftp-action@v2.0.0
+      #   with:
+      #     host: ${{ secrets.HOSTNAME }}
+      #     user: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
+      #     localDir: ./dist/
+      #     remoteDir: /
