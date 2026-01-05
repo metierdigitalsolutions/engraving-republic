@@ -47,7 +47,7 @@ jobs:
           username: ${{ secrets.STAGING_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           source: ./dist/
-          target: public_html/
+          target: /
 
         # - name: Check if deployment succeeded
         # if: ${{ failure() }}
