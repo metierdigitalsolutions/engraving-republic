@@ -39,6 +39,27 @@ jobs:
             npm run build:production
           fi
 
+      - name: Test FTP Before Deploy
+        run: |
+          echo "Testing FTP connection to ${{ secrets.HOSTNAME }}:21..."
+          
+          # Simple connection test
+          timeout 10 bash -c "echo > /dev/tcp/${{ secrets.HOSTNAME }}/21" && \
+            echo "✅ Port 21 is open" || echo "❌ Port 21 is closed"
+          
+          # Test with ftp client
+          sudo apt-get install -y ftp
+          timeout 15 ftp -n ${{ secrets.HOSTNAME }} << EOF
+          user ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }} ${{ secrets.PASSWORD }}
+          quit
+          EOF
+          
+          if [ $? -eq 0 ]; then
+            echo "✅ FTP connection successful"
+          else
+            echo "❌ FTP connection failed - Use SFTP instead"
+          fi
+          
       - name: Deploy with Timeout
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
@@ -50,17 +71,6 @@ jobs:
           timeout: 300000  # 5 minutes
           log-level: verbose
           
-      # - name: Deploy via SFTP
-      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-      #   with:
-      #     server: ${{ secrets.HOSTNAME }}
-      #     username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
-      #     password: ${{ secrets.PASSWORD }}
-      #     port: 22  # SFTP uses port 22
-      #     local_path: './dist/*'
-      #     remote_path: '/'
-      #     args: '-o ConnectTimeout=30 -o ServerAliveInterval=60'
-
       # # Deploy Build Output to Landing-Page Folder
       # - name: Deploy Landing-Page Build
       #   # uses: SamKirkland/FTP-Deploy-Action@4.3.3
