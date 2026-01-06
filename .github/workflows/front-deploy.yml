@@ -42,7 +42,7 @@ jobs:
       - name: Deploy to Hostinger via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: engravingrepublicng.com
+          server: '145.223.84.100'
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: '65002'  # Hostinger port
