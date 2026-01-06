@@ -46,19 +46,10 @@ jobs:
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: '65002'  # Hostinger port
+          sftp_only: true
           ssh_private_key: ''  # Leave empty for password auth
           local_path: './dist/*'
           remote_path: '/public_html/'
           # args is not a valid parameter for this action
 
-          
-      # - name: Deploy to Hostinger via SFTP
-      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-      #   with:
-      #     server: engravingrepublicng.com
-      #     username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
-      #     password: ${{ secrets.PASSWORD }}
-      #     port: 65002  # ⭐ Hostinger specific port
-      #     local_path: './dist/*'
-      #     remote_path: '/public_html/'  # ⭐ Hostinger web directory
-      #     args: '-o ConnectTimeout=30 -o ServerAliveInterval=15'
+
