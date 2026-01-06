@@ -49,7 +49,7 @@ jobs:
           sftp_only: true
           ssh_private_key: ''  # Leave empty for password auth
           local_path: './dist/*'
-          remote_path: '/public_html/'
+          remote_path: '/'
           # args is not a valid parameter for this action
 
 
