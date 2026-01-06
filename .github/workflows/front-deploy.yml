@@ -1,4 +1,4 @@
-name: Publish Entraving Frontend
+name: Deploy to Hostinger
 
 on:
   push:
@@ -7,49 +7,58 @@ on:
       - main
 
 jobs:
-  Deploy-Frontend:
+  deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
-      # Checkout repository with submodules
       - name: Checkout Repository
         uses: actions/checkout@v3
-        with:
-          submodules: true  # Enable submodules during checkout
-          fetch-depth: 1
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
-      # Setup Node.js version
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'  # Enable npm caching
+          cache: 'npm'
 
-      # Install dependencies (npm ci will use cache if available)
       - name: Install dependencies
         run: npm ci --prefer-offline
 
-      # Build Landing-Page with environment-specific command
-      - name: Build Landing-Page
+      - name: Build Project
         run: |
           if [ "${{ github.ref }}" == "refs/heads/staging" ]; then
             npm run build:staging
           else
             npm run build:production
           fi
-      
-      - name: Deploy via Git Push
+
+      - name: Test Hostinger Port 65002
         run: |
-          # Configure git
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          
-          # Add remote (if you have git repo on server)
-          git remote add deploy ssh://${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}@${{ secrets.HOSTNAME }}/path/to/repo.git
-          
-          # Push to server
-          git push deploy HEAD:main -f
+          echo "Testing Hostinger SFTP port 65002..."
+          timeout 5 nc -zv engravingrepublicng.com 65002 && \
+            echo "✅ Port 65002 is OPEN (Hostinger SFTP)" || \
+            echo "❌ Port 65002 is CLOSED"
 
+      - name: Deploy to Hostinger via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: engravingrepublicng.com
+          username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: '65002'  # Hostinger port
+          ssh_private_key: ''  # Leave empty for password auth
+          local_path: './dist/*'
+          remote_path: '/public_html/'
+          # args is not a valid parameter for this action
 
           
+      # - name: Deploy to Hostinger via SFTP
+      #   uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      #   with:
+      #     server: engravingrepublicng.com
+      #     username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
+      #     password: ${{ secrets.PASSWORD }}
+      #     port: 65002  # ⭐ Hostinger specific port
+      #     local_path: './dist/*'
+      #     remote_path: '/public_html/'  # ⭐ Hostinger web directory
+      #     args: '-o ConnectTimeout=30 -o ServerAliveInterval=15'
