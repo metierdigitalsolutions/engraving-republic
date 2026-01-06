@@ -1,4 +1,4 @@
-name: Deploy to Hostinger
+name: Publish Engraving Frontend to Staging/Master Server
 
 on:
   push:
@@ -7,24 +7,31 @@ on:
       - main
 
 jobs:
-  deploy:
+  Deploy-Frontend:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
 
     steps:
+      # Checkout repository with submodules
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          submodules: true  # Enable submodules during checkout
+          fetch-depth: 1
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
+      # Setup Node.js version
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'npm'  # Enable npm caching
 
+      # Install dependencies (npm ci will use cache if available)
       - name: Install dependencies
         run: npm ci --prefer-offline
 
-      - name: Build Project
+      # Build Landing-Page with environment-specific command
+      - name: Build Landing-Page
         run: |
           if [ "${{ github.ref }}" == "refs/heads/staging" ]; then
             npm run build:staging
@@ -32,24 +39,36 @@ jobs:
             npm run build:production
           fi
 
-      - name: Test Hostinger Port 65002
-        run: |
-          echo "Testing Hostinger SFTP port 65002..."
-          timeout 5 nc -zv engravingrepublicng.com 65002 && \
-            echo "✅ Port 65002 is OPEN (Hostinger SFTP)" || \
-            echo "❌ Port 65002 is CLOSED"
-
-      - name: Deploy to Hostinger via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+      # Deploy Build Output to Landing-Page Folder
+      - name: Deploy Landing-Page Build
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: '145.223.84.100'
+          server: ${{ secrets.HOSTNAME }}
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          port: '65002'  # Hostinger port
-          sftp_only: true
-          ssh_private_key: ''  # Leave empty for password auth
-          local_path: './dist/*'
-          remote_path: '/'
-          # args is not a valid parameter for this action
-
-
+          local-dir: ./dist/
+          server-dir: /
+          log-level: minimal  # Reduced from verbose to standard
+          state-name: .ftp-deploy-state-${{ github.ref_name }}.json  # Separate state per branch
+          dangerous-clean-slate: false
+          exclude: |
+            **/.DS_Store
+            **/.git/**
+            **/.gitignore
+            **/.github/**
+            **/.env*
+            **/*.map
+            **/test/**
+            **/tests/**
+            **/spec/**
+            **/cypress/**
+            **/node_modules/**
+            **/README.md
+            **/CHANGELOG.md
+            **/LICENSE
+            **/package.json
+            **/package-lock.json
+            **/tsconfig.json
+            **/webpack.config.js
+            **/src/**
+            **/public/**
