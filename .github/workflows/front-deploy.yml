@@ -46,6 +46,8 @@ jobs:
           server: ${{ secrets.HOSTNAME }}
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          port: 21
+          protocol: ftp
           local-dir: ./dist/
           server-dir: /
           log-level: verbose  # Reduced from verbose to standard
