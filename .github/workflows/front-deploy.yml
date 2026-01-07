@@ -39,39 +39,15 @@ jobs:
             npm run build:production
           fi
 
-      # Deploy Build Output to Landing-Page Folder
-      - name: Deploy Landing-Page Build
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      - name: Deploy with SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ${{ secrets.HOSTNAME }}
-          username: ${{ secrets.MAIN_FRONT_USERNAME }}
-          password: ${{ secrets.PASSWORD }}
-          port: 21
-          protocol: ftp
-          security: loose
-          local-dir: ./dist/
-          server-dir: /
-          log-level: verbose  # Reduced from verbose to standard
-          state-name: .ftp-deploy-state-main.json  # Separate state per branch
-          dangerous-clean-slate: false
-          exclude: |
-            **/.DS_Store
-            **/.git/**
-            **/.gitignore
-            **/.github/**
-            **/.env*
-            **/*.map
-            **/test/**
-            **/tests/**
-            **/spec/**
-            **/cypress/**
-            **/node_modules/**
-            **/README.md
-            **/CHANGELOG.md
-            **/LICENSE
-            **/package.json
-            **/package-lock.json
-            **/tsconfig.json
-            **/webpack.config.js
-            **/src/**
-            **/public/**
+          server: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
+          username: ${{ secrets.SFTP_USER }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          ssh_private_key: ''
+          local_path: ./dist/*
+          remote_path: ${{ secrets.SFTP_REMOTE_DIR }}
+          sftp_only: true
+
