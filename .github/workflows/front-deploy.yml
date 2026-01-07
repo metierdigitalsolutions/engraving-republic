@@ -47,9 +47,10 @@ jobs:
           username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 21
-          protocol: ftp
+          protocol: ftps
+          security: explicit
           local-dir: ./dist/
-          server-dir: /public_html/
+          server-dir: /
           log-level: verbose  # Reduced from verbose to standard
           state-name: .ftp-deploy-state-${{ github.ref_name }}.json  # Separate state per branch
           dangerous-clean-slate: false
