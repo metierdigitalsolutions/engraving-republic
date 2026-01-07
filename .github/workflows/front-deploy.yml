@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           local-dir: ./dist/
           server-dir: /
-          log-level: minimal  # Reduced from verbose to standard
+          log-level: verbose  # Reduced from verbose to standard
           state-name: .ftp-deploy-state-${{ github.ref_name }}.json  # Separate state per branch
           dangerous-clean-slate: false
           exclude: |
