@@ -44,15 +44,15 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
           server: ${{ secrets.HOSTNAME }}
-          username: ${{ github.ref == 'refs/heads/staging' && secrets.STAGING_FRONT_USERNAME || secrets.MAIN_FRONT_USERNAME }}
+          username: ${{ secrets.MAIN_FRONT_USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: 21
-          protocol: ftps
-          security: strict
+          protocol: ftp
+          security: loose
           local-dir: ./dist/
           server-dir: /
           log-level: verbose  # Reduced from verbose to standard
-          state-name: .ftp-deploy-state-${{ github.ref_name }}.json  # Separate state per branch
+          state-name: .ftp-deploy-state-main.json  # Separate state per branch
           dangerous-clean-slate: false
           exclude: |
             **/.DS_Store
