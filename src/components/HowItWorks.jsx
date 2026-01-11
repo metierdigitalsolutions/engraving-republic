@@ -2,7 +2,7 @@ const steps = [
   "Share your idea",
   "Design consultation",
   "Precision engraving",
-  "Pickup, delivery or on-site",
+  "Pickup, delivery or on-site service",
 ]
 
 export default function HowItWorks() {

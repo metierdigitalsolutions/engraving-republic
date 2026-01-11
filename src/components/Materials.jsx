@@ -1,6 +1,12 @@
-const materials = [
-  "Metal", "Wood", "Acrylic", "Leather", "Glass", "Plastic"
-]
+export const materials = [
+  "Metal (stainless steel, aluminium)",
+  "Wood",
+  "Acrylic",
+  "Glass",
+  "Leather",
+  "Select plastics",
+];
+
 
 export default function Materials() {
   return (

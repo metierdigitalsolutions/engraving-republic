@@ -1,12 +1,13 @@
 import Header from "./components/Header"
 import Hero from "./components/HeroSlider"
 import TrustBar from "./components/TrustBar"
+import About from "./components/About"
 import Services from "./components/Services"
 import Materials from "./components/Materials"
 import HowItWorks from "./components/HowItWorks"
 import Gallery from "./components/Gallery"
 // import CTA from "./components/CTA"
-// import Footer from "./components/Footer"
+import Footer from "./components/Footer"
 import StickyActions from "./components/StickyActions"
 
 export default function App() {
@@ -15,12 +16,13 @@ export default function App() {
       <Header />
       <Hero />
       <TrustBar />
+      <About />
       <Services />
       <Materials />
       <HowItWorks />
       <Gallery />
       {/* <CTA /> */}
-      {/* <Footer /> */}
+      <Footer />
       <StickyActions />
     </div>
   )

@@ -1,5 +1,12 @@
 import { useState } from "react"
 
+const navLinks = [
+  { label: "Services", href: "#services" },
+  { label: "Materials", href: "#materials" },
+  { label: "Work", href: "#work" },
+  { label: "Process", href: "#process" },
+]
+
 export default function Header() {
   const [open, setOpen] = useState(false)
 
@@ -8,52 +15,68 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* Logo */}
-        <div className="font-semibold tracking-wide text-white text-lg">
-          {/* Engraving<span className="text-brandGreen/80">Republic</span> */}
+        <a href="#" className="flex items-center">
           <img
-              src="/logo.png"
-              alt="Engraving republic logo"
-              className="w-40 h-10 md:w-80 md:h-20 hover:scale-105 transition-transform"
-            />
-        </div>
+            src="/logo.png"
+            alt="Engraving Republic logo"
+            className="w-40 md:w-72 hover:scale-105 transition-transform"
+          />
+        </a>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-10 text-sm text-white/60">
-          {["Services", "Materials", "Work", "Process"].map(link => (
+          {navLinks.map(link => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
+              key={link.label}
+              href={link.href}
               className="hover:text-white transition"
             >
-              {link}
+              {link.label}
             </a>
           ))}
         </nav>
 
         {/* CTA */}
         <div className="hidden md:block">
-          <button className="px-6 py-2 rounded-full border border-white/20 text-sm text-white hover:border-white/40 transition">
-            Request Quote
-          </button>
+          <a
+            href="mailto:engraver@engravingrepublic.com"
+            className="px-6 py-2 rounded-full border border-white/20 text-sm text-white hover:border-white/40 transition"
+          >
+            Request a Quote
+          </a>
         </div>
 
         {/* Mobile Toggle */}
         <button
           onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
           className="md:hidden text-white/70"
         >
-          Menu
+          {open ? "Close" : "Menu"}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {open && (
         <div className="md:hidden bg-[#070707] border-t border-white/5 px-6 py-6 space-y-4 text-white/70">
-          {["Services", "Materials", "Work", "Process"].map(link => (
-            <a key={link} href="#" className="block">
-              {link}
+          {navLinks.map(link => (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="block hover:text-white transition"
+            >
+              {link.label}
             </a>
           ))}
+
+          <a
+            href="mailto:engraver@engravingrepublic.com"
+            onClick={() => setOpen(false)}
+            className="block pt-4 border-t border-white/10 text-white"
+          >
+            Request a Quote
+          </a>
         </div>
       )}
     </header>

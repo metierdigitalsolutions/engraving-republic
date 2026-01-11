@@ -19,6 +19,12 @@ const slides = [
     subtitle:
       "Industrial-grade engraving with refined aesthetics.",
   },
+  {
+    eyebrow: "On-Site & Studio Services",
+    title: "Engraving Wherever You Are",
+    subtitle:
+      "Express turnaround, bulk orders, and live event engraving for brands and individuals.",
+  },
 ]
 
 export default function HeroSlider() {
