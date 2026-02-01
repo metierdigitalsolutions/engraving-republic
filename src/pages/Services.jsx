@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { fadeUp, stagger } from "../animations";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -7,24 +8,28 @@ const services = [
     // img: "/images/services/gifts.jpg",
     img: "/images/services/design-1.svg",
     desc: "Birthdays, weddings, anniversaries, keepsakes.",
+    slug: "personalized-gifts"
   },
   {
     title: "Corporate & Promotional Items",
     // img: "/images/services/corporate.jpg",
     img: "/images/services/design-2.svg",
     desc: "Branded gifts, plaques, awards, souvenirs.",
+    slug: "corporate-gifts"
   },
   {
     title: "Brand & Logo Engraving",
     // img: "/images/services/logo.png",
     img: "/images/services/design-3.svg",
     desc: "Clean, professional engraving for your brand.",
+    slug: "logo-engraving"
   },
   {
     title: "Custom & Bulk Orders",
     // img: "/images/services/bulk.jpg",
     img: "/images/services/design-4.svg",
     desc: "One piece or one thousand — same quality.",
+    slug: "bulk-orders"
   },
   // {
   //   title: "Laser Engraving",
@@ -83,13 +88,13 @@ export default function Services() {
 
         <div>
           <motion.div
-  variants={stagger}
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true, amount: 0.2 }}
-  // className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
->
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            // className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
           {services.map(service => (
             <motion.div
               key={service.title}
@@ -98,12 +103,14 @@ export default function Services() {
               transition={{ type: "spring", stiffness: 200 }}
               className="rounded-xl overflow-hidden bg-neutral-900"
             >
+              <Link to={`/services/${service.slug}`}>
               <ServiceCard
                 key={service.title}
                 img={service.img}
                 title={service.title}
                 description={service.desc}
               />
+              </Link>
             </motion.div>
           ))}
           </motion.div>

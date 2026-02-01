@@ -1,34 +1,26 @@
 import Header from "./components/Header"
-import Hero from "./components/HeroSlider"
-import TrustBar from "./components/TrustBar"
-import Services from "./components/Services"
-import HowItWorks from "./components/HowItWorks"
-import WhyChooseUs from "./components/WhyChooseUs"
-import CTA from "./components/CTA"
-import Portfolio from "./components/Portfolio"
+import Home from "./pages/Home"
+import Footer from "./components/Footer"
+import Services from "./pages/Services";
+import ServiceDetail from "./pages/ServiceDetail";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 // import About from "./components/About"
 // import Materials from "./components/Materials"
 // import Gallery from "./components/Gallery"
 // import StickyActions from "./components/StickyActions"
-import Footer from "./components/Footer"
 
 export default function App() {
   return (
-    <div className="bg-brandDark text-white">
+    <Router>
       <Header />
-      <Hero />
-      <Services />
-      <TrustBar />
-      <HowItWorks />
-      <WhyChooseUs />
-      <Portfolio />
-      <CTA />
-
-      {/* <About />
-      <Materials />
-      <Gallery /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/services/:slug" element={<ServiceDetail />} />
+      </Routes>
       <Footer />
-      {/* <StickyActions /> */}
-    </div>
+    </Router>
   )
 }

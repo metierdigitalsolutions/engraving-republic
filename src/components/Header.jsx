@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 const navLinks = [
-  { label: "Services", href: "#services" },
+  { label: "Services", href: "services" },
   { label: "Why Choose Us", href: "#why-choose-us" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Process", href: "#process" },
@@ -15,7 +15,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
         {/* Logo */}
-        <a href="#" className="flex items-center">
+        <a href="/" className="flex items-center">
           <img
             src="/logo.png"
             alt="Engraving Republic logo"
