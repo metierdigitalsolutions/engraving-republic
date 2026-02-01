@@ -5,16 +5,18 @@ const steps = [
   "Pickup, delivery or on-site service",
 ]
 
+{/* ================= HOW IT WORKS ================= */}
 export default function HowItWorks() {
   return (
-    <section className="bg-[#0b0b0b] text-white py-20">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="process" className="bg-neutral-900 py-20 px-6_">
+        {/* <section className="bg-[#0b0b0b] text-white py-20" id="work"> */}
+      <div className="max-w-6xl mx-auto px-6">
         
         <h2 className="text-3xl font-semibold mb-12">
           Our Process
         </h2>
 
-        <ol className="space-y-8">
+        {/* <ol className="space-y-8">
           {steps.map((step, i) => (
             <li key={step} className="flex gap-6">
               <span className="text-brandGreen/70 font-semibold">
@@ -25,8 +27,48 @@ export default function HowItWorks() {
               </span>
             </li>
           ))}
-        </ol>
+        </ol> */}
+        
+          <div className="grid md:grid-cols-3 gap-10 text-center">
+            {[
+              {
+                step: "1",
+                title: "Share Your Idea",
+                desc: "Send your design, logo, or concept via WhatsApp.",
+              },
+              {
+                step: "2",
+                title: "We Prepare & Confirm",
+                desc: "Mockups, pricing, and timeline confirmation.",
+              },
+              {
+                step: "3",
+                title: "We Engrave & Deliver",
+                desc: "Precision engraving and delivery or pickup.",
+              },
+            ].map((item, i) => (
+              <div key={i}>
+                <div className="text-green-500 text-5xl font-bold mb-4">
+                  {item.step}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-12 text-center">
+            <a
+              href="https://wa.me/234XXXXXXXXXX"
+              className="inline-block bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-lg font-semibold transition"
+            >
+              Start on WhatsApp
+            </a>
+          </div>
       </div>
     </section>
+
   )
 }

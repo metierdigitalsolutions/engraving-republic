@@ -15,7 +15,7 @@ export default function About() {
 
           <p>
             Our advanced laser technology allows us to deliver sharp, durable
-            results on a wide range of materials — quickly and with exceptional accuracy.
+            results on a wide range of materials - quickly and with exceptional accuracy.
           </p>
         </div>
       </div>

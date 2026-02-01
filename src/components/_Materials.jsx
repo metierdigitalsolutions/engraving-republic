@@ -10,7 +10,7 @@ export const materials = [
 
 export default function Materials() {
   return (
-    <section className="bg-[#070707] text-white py-20">
+    <section className="bg-[#070707] text-white py-20_" id="materials">
       <div className="max-w-6xl mx-auto px-6">
         
         <h2 className="text-3xl font-semibold mb-12">
