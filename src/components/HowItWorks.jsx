@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { fadeUp, stagger } from "../animations";
+
 const steps = [
   "Share your idea",
   "Design consultation",
@@ -29,6 +32,13 @@ export default function HowItWorks() {
           ))}
         </ol> */}
         
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              // className="grid md:grid-cols-3 gap-10 text-center"
+            >
           <div className="grid md:grid-cols-3 gap-10 text-center">
             {[
               {
@@ -47,6 +57,7 @@ export default function HowItWorks() {
                 desc: "Precision engraving and delivery or pickup.",
               },
             ].map((item, i) => (
+              <motion.div key={i} variants={fadeUp}>
               <div key={i}>
                 <div className="text-green-500 text-5xl font-bold mb-4">
                   {item.step}
@@ -56,8 +67,10 @@ export default function HowItWorks() {
                 </h3>
                 <p className="text-gray-400">{item.desc}</p>
               </div>
+              </motion.div>
             ))}
           </div>
+            </motion.div>
           
           <div className="mt-12 text-center">
             <a

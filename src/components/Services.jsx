@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { fadeUp, stagger } from "../animations";
+
 const services = [
   {
     title: "Personalized Gifts",
@@ -78,15 +81,32 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div>
+          <motion.div
+  variants={stagger}
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: true, amount: 0.2 }}
+  // className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+>
           {services.map(service => (
-            <ServiceCard
+            <motion.div
               key={service.title}
-              img={service.img}
-              title={service.title}
-              description={service.desc}
-            />
+              variants={fadeUp}
+              whileHover={{ y: -6 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="rounded-xl overflow-hidden bg-neutral-900"
+            >
+              <ServiceCard
+                key={service.title}
+                img={service.img}
+                title={service.title}
+                description={service.desc}
+              />
+            </motion.div>
           ))}
+          </motion.div>
         </div>
       </div>
     </section>

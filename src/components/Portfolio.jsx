@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { motion } from "framer-motion";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -42,9 +43,13 @@ export default function Portfolio() {
             ].map((img, i) => (
                 <SwiperSlide key={i}>
                 <div className="rounded-xl overflow-hidden">
-                    <img
+                    <motion.img
                     src={`/images/portfolio/${img}`}
                     alt="Engraved product"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     className="h-72 w-full object-cover hover:scale-105 transition"
                     />
                 </div>
