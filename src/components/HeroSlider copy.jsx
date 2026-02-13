@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
 
+import { motion } from "framer-motion";
+import { fadeUp } from "../animations";
+
+
 const slides = [
   {
     eyebrow: "Precision Craftsmanship",
@@ -27,78 +31,47 @@ const slides = [
   },
 ]
 
+{/* ================= HERO ================= */}
 export default function HeroSlider() {
-  const [index, setIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex(i => (i + 1) % slides.length)
-    }, 6000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <section
-    className="relative min-h-screen flex items-center text-white overflow-hidden bg-black"
-    style={{
-        backgroundImage: "url('/hero/engraving-bg.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-    }}
+  return ( 
+    <motion.div
+      variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      className="relative max-w-4xl_ text-center"
     >
-  {/* Dark overlay */}
-  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80" />
+      <main className="bg-black text-white mt-20">
+        <section className="relative min-h-[90vh] flex items-center justify-center px-6">
+          <div className="absolute inset-0 bg-[url('/images/hero/engraving-bg.jpg')] bg-cover bg-center opacity-30"></div>
 
-  {/* Vignette */}
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_40%,rgba(0,0,0,0.85))]" />
-
-  {/* Accent glow */}
-  <div className="relative_ max-w-5xl mx-auto px-6 text-center">
-
-        {slides.map((slide, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
-              ${i === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6 pointer-events-none"}
-            `}
-          >
-            <p className="uppercase tracking-[0.3em] text-xs text-white/40 mb-6">
-              {slide.eyebrow}
-            </p>
-
-            <h1 className="text-5xl md:text-6xl font-bold leading-[1.05]">
-              {slide.title}
+          <div className="relative max-w-4xl text-center">
+            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+              Premium Custom Engraving for Gifts, Brands & Businesses
             </h1>
 
-            <p className="mt-8 text-lg text-white/60 max-w-xl mx-auto">
-              {slide.subtitle}
+            <p className="mt-6 text-lg md:text-xl text-gray-300">
+              From one-off personalized gifts to large corporate orders, we engrave
+              with precision, speed, and lasting quality.
             </p>
 
-            <div className="mt-12 flex gap-6">
-              <button className="px-8 py-4 rounded-full bg-brandGreen text-black font-medium shadow-xl shadow-brandGreen/20">
-                Request a Quote
-              </button>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://wa.me/2348026329577"
+                className="bg-green-500 hover:bg-green-600 text-black px-8 py-4 rounded-lg font-semibold transition"
+              >
+                Get a Quote on WhatsApp
+              </a>
 
-              <button className="px-8 py-4 rounded-full border border-white/15 text-white/80 hover:border-white/30 transition">
-                View Portfolio
-              </button>
+              <a
+                href="#portfolio"
+                className="border border-white/30 hover:border-white px-8 py-4 rounded-lg transition"
+              >
+                View Our Work
+              </a>
             </div>
           </div>
-        ))}
-
-        {/* Dots */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-3">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setIndex(i)}
-              className={`w-2 h-2 rounded-full transition
-                ${i === index ? "bg-brandGreen" : "bg-white/30"}
-              `}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+        </section>
+      </main>
+    </motion.div>
   )
 }
