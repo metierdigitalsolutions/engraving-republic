@@ -11,7 +11,7 @@ export default function Footer() {
             <h3 className="text-xl font-semibold mb-4">
               Engraving Republic
             </h3>
-            <p className="text-white/60 leading-relaxed max-w-sm">
+            <p className="text-white/90 leading-relaxed max-w-sm">
               Precision laser engraving for individuals, brands, and events.
               Crafted with accuracy, speed, and attention to detail.
             </p>
@@ -19,10 +19,10 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-sm uppercase tracking-widest text-white/40 mb-4">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-white/90 mb-4">
               Services
             </h4>
-            <ul className="space-y-2 text-white/60">
+            <ul className="space-y-2 text-white/80">
               <li>Laser Engraving</li>
               <li>Laser Marking</li>
               <li>Custom & Bulk Orders</li>
@@ -33,10 +33,10 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-sm uppercase tracking-widest text-white/40 mb-4">
+            <h4 className="text-sm font-bold uppercase tracking-widest text-white/90 mb-4">
               Contact
             </h4>
-            <ul className="space-y-3 text-white/60">
+            <ul className="space-y-3 text-white/80">
               <li>
                 📧{" "}
                 <a
@@ -64,18 +64,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
+        <div className="mt-16 pt-8 border-t border-white/90 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/80">
           <p>
             © {new Date().getFullYear()} Engraving Republic. All rights reserved.
           </p>
 
           <p className="flex items-center gap-1">
-            Website by{" "}
+            Website by:{" "}
             <a
               href="https://www.metierdigitals.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition underline underline-offset-2"
+              className="hover:text-green-100 transition text-green-200 underline-offset-2"
             >
               Métier Digital Solutions
             </a>

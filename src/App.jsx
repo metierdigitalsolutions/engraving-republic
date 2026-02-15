@@ -15,11 +15,13 @@ export default function App() {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/:slug" element={<ServiceDetail />} />
-      </Routes>
+      <div className="_bg-neutral-900 _bg-brandDark _text-white">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+        </Routes>
+      </div>
       <Footer />
     </Router>
   )

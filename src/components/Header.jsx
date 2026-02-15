@@ -24,12 +24,12 @@ export default function Header() {
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-10 text-sm text-white/60">
+        <nav className="hidden md:flex gap-10 text-lg text-white/90">
           {navLinks.map(link => (
             <a
               key={link.label}
               href={link.href}
-              className="hover:text-white transition"
+              className="hover:text-white/60 transition"
             >
               {link.label}
             </a>
@@ -40,7 +40,7 @@ export default function Header() {
         <div className="hidden md:block">
           <a
             href="mailto:engraver@engravingrepublic.com"
-            className="px-6 py-2 rounded-full border border-white/20 text-sm text-white hover:border-white/40 transition"
+            className="px-6 py-2 bg-green-700 rounded-full border border-white/20 text-sm text-white hover:border-white/40 transition"
           >
             Request a Quote
           </a>
@@ -73,7 +73,7 @@ export default function Header() {
           <a
             href="mailto:engraver@engravingrepublic.com"
             onClick={() => setOpen(false)}
-            className="block pt-4 border-t border-white/10 text-white"
+            className="block pt-4 bg-green-700 border-t border-white/10 text-white"
           >
             Request a Quote
           </a>

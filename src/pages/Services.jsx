@@ -72,7 +72,7 @@ export default function Services() {
   const ref = useRevealOnScroll()
 
   return (
-    <section className="bg-[#070707] text-white py-24" id="services">
+    <section className="rounded rounded-xl bg-white/10 _text-white py-24" id="services">
       <div className="max-w-6xl mx-auto px-6">
         
         <div className="max-w-2xl mb-16">
@@ -80,7 +80,7 @@ export default function Services() {
             {/* Services & Capabilities */}
             What We Engrave
           </h2>
-          <p className="text-white/60">
+          <p className="_text-white/60">
             Precision laser engraving and cutting services designed for individuals,
             brands, and events - delivered with speed, accuracy, and consistency.
           </p>
@@ -101,7 +101,7 @@ export default function Services() {
               variants={fadeUp}
               whileHover={{ y: -6 }}
               transition={{ type: "spring", stiffness: 200 }}
-              className="rounded-xl overflow-hidden bg-neutral-900"
+              className="rounded-xl overflow-hidden bg-red-600"
             >
               <Link to={`/services/${service.slug}`}>
               <ServiceCard
@@ -124,7 +124,7 @@ function ServiceCard({ img, title, description }) {
   return (
     <div
       // key={i}
-      className="rounded-xl overflow-hidden bg-neutral-900"
+      className="rounded-xl overflow-hidden bg-red-600 text-white"
     >
      <img
         src={img}
@@ -135,7 +135,7 @@ function ServiceCard({ img, title, description }) {
         <h3 className="text-xl font-semibold mb-2">
           {title}
         </h3>
-        <p className="text-gray-400">{description}</p>
+        <p className="text-white/80 _text-gray-400">{description}</p>
       </div>
     </div>
   )

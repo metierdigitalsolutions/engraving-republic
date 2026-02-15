@@ -11,7 +11,7 @@ export default function Portfolio() {
     {/* ================= PORTFOLIO ================= */}
   return (
       
-    <section id="portfolio" className="bg-neutral-900 py-20 px-6">
+    <section id="portfolio" className="_bg-neutral-900 py-20 px-6">
         <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Our Work Speaks for Itself

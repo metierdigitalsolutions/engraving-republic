@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 import Hero from "../components/HeroSlider"
 import Services from "../pages/Services"
 import TrustBar from "../components/TrustBar"
@@ -9,19 +9,20 @@ import Portfolio from "../components/Portfolio"
 
 export default function Home() {
   return ( 
-     <div className="bg-brandDark text-white">
-        <Hero />
-        <Services />
-        <TrustBar />
-        <HowItWorks />
-        <WhyChooseUs />
-        <Portfolio />
-        <CTA />
+    <>
+      {/* //  <div className="bg-[#070707] _bg-brandDark text-white"> */}
+      <Hero />
+      <Services />
+      <TrustBar />
+      <HowItWorks />
+      <WhyChooseUs />
+      <Portfolio />
+      <CTA />
 
-        {/* <About />
-        <Materials />
-        <Gallery /> */}
-        {/* <StickyActions /> */}
-    </div>
+      {/* <About />
+      <Materials />
+      <Gallery /> */}
+      {/* <StickyActions /> */}
+    </>
   )
 }

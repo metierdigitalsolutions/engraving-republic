@@ -11,11 +11,11 @@ const steps = [
 {/* ================= HOW IT WORKS ================= */}
 export default function HowItWorks() {
   return (
-    <section id="process" className="bg-neutral-900 py-20 px-6_">
+    <section id="process" className="bg-red-100 py-20 px-6_">
         {/* <section className="bg-[#0b0b0b] text-white py-20" id="work"> */}
       <div className="max-w-6xl mx-auto px-6">
         
-        <h2 className="text-3xl font-semibold mb-12">
+        <h2 className="text-3xl font-semibold text-gray-700 mb-12">
           Our Process
         </h2>
 
@@ -62,10 +62,10 @@ export default function HowItWorks() {
                 <div className="text-green-500 text-5xl font-bold mb-4">
                   {item.step}
                 </div>
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="text-green-600 text-xl font-semibold mb-2">
                   {item.title}
                 </h3>
-                <p className="text-gray-400">{item.desc}</p>
+                <p className="text-gray-900">{item.desc}</p>
               </div>
               </motion.div>
             ))}
@@ -75,7 +75,7 @@ export default function HowItWorks() {
           <div className="mt-12 text-center">
             <a
               href="https://wa.me/234XXXXXXXXXX"
-              className="inline-block bg-green-500 hover:bg-green-600 text-black px-10 py-4 rounded-lg font-semibold transition"
+              className="inline-block bg-green-700 hover:bg-green-600 text-white/90 px-10 py-4 rounded-lg font-semibold transition"
             >
               Start on WhatsApp
             </a>
