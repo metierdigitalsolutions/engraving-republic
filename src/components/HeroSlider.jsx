@@ -70,15 +70,15 @@ export default function HeroSlider() {
         animate="visible"
         className="relative max-w-4xl text-center"
       >
-        <p className="uppercase tracking-widest text-green-500 mb-4">
+        <p className="uppercase tracking-widest text-green-700 mb-4">
           {slide.eyebrow}
         </p>
 
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+        <h1 className="text-4xl md:text-6xl text-green-700 font-bold leading-tight">
           {slide.title}
         </h1>
 
-        <p className="mt-6 text-lg md:text-xl text-white/80">
+        <p className="mt-6 text-lg md:text-xl text-gray-500">
           {slide.subtitle}
         </p>
 
