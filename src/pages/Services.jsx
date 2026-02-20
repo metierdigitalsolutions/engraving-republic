@@ -6,45 +6,49 @@ const services = [
   {
     title: "Personalized Gifts",
     // img: "/images/services/gifts.jpg",
-    img: "/images/services/design-1.svg",
+    img: "/images/services/engraved-wood-bamboo-cup.jpg",
     desc: "Birthdays, weddings, anniversaries, keepsakes.",
     slug: "personalized-gifts"
   },
   {
     title: "Corporate & Promotional Items",
     // img: "/images/services/corporate.jpg",
-    img: "/images/services/design-2.svg",
+    img: "/images/services/promotional-item.jpg",
     desc: "Branded gifts, plaques, awards, souvenirs.",
     slug: "corporate-gifts"
   },
   {
     title: "Brand & Logo Engraving",
     // img: "/images/services/logo.png",
-    img: "/images/services/design-3.svg",
+    img: "/images/services/brand-logo.jpg",
     desc: "Clean, professional engraving for your brand.",
     slug: "logo-engraving"
   },
   {
-    title: "Custom & Bulk Orders",
+    title: "Express Engraving",
     // img: "/images/services/bulk.jpg",
-    img: "/images/services/design-4.svg",
-    desc: "One piece or one thousand — same quality.",
+    img: "/images/services/laser-engraving-machine.jpg",
+    desc: "One piece or one thousand - same quality.",
     slug: "bulk-orders"
   },
-  // {
-  //   title: "Laser Engraving",
-  //   description:
-  //     "High-precision engraving on metal, wood, acrylic, leather, and glass. Suitable for surface or deep engraving with permanent, high-resolution results.",
-  // },
+  {
+    title: "Custom & Bulk Orders",
+    // img: "/images/services/bulk.jpg",
+    img: "/images/services/personalized-gift.webp",
+    desc: "High-precision engraving on metal, wood, acrylic, leather, and glass",
+    slug: "custom-bulk-orders"
+  },
+  {
+    title: "On-Site Event Engraving",
+    img: "/images/services/laser-engraving.jpg",
+    desc:
+      "High-precision engraving on metal, wood, acrylic, leather, and glass. Suitable for surface or deep engraving with permanent, high-resolution results.",
+    slug: "onsite-event"
+  },
   // {
   //   title: "Laser Marking",
   //   description:
   //     "Ideal for barcodes, QR codes, serial numbers, and identification plates. Fast, clean, and perfect for industrial and promotional applications.",
-  // },
-  // {
-  //   title: "Custom & Bulk Orders",
-  //   description:
-  //     "From a single personalized piece to large production runs. Branded merchandise, corporate gifts, and bespoke projects handled with consistency.",
   // },
   // {
   //   title: "On-Site Event Engraving",
